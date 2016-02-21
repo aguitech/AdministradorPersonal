@@ -8,4 +8,5 @@
     <string name="title_activity_menu_principal">MenuPrincipalActivity</string>
     <string name="title_activity_login">LoginActivity</string>
     <string name="title_activity_cerrar_sesion">CerrarSesionActivity</string>
+    <string name="title_activity_directorio">DirectorioActivity</string>
 </resources>

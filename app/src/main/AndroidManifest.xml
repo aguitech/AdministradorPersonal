@@ -40,6 +40,10 @@
         <activity
             android:name=".CerrarSesionActivity"
             android:label="@string/title_activity_cerrar_sesion"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".DirectorioActivity"
+            android:label="@string/title_activity_directorio"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
