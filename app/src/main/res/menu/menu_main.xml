@@ -6,6 +6,10 @@
         android:title="@string/action_home"
         android:orderInCategory="100"
         app:showAsAction="never" />
+    <item android:id="@+id/action_directorio"
+        android:title="@string/action_directorio"
+        android:orderInCategory="100"
+        app:showAsAction="never" />
     <item android:id="@+id/action_salir"
         android:title="@string/action_salir"
         android:orderInCategory="100"

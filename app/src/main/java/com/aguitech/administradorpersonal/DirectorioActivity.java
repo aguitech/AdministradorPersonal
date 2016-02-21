@@ -1,20 +1,32 @@
 package com.aguitech.administradorpersonal;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.ListView;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.InputStream;
+import java.net.URL;
 import java.util.ArrayList;
 
 //public class DirectorioActivity extends AppCompatActivity implements Download_data_directorio.download_complete {
-public class DirectorioActivity extends AppCompatActivity {
+public class DirectorioActivity extends AppCompatActivity implements Download_data_directorio.download_complete {
 
     public ListView list_directorio;
     public ArrayList<Countries> countries = new ArrayList<Countries>();
@@ -108,6 +120,101 @@ public class DirectorioActivity extends AppCompatActivity {
             }
         });
 
+
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_home) {
+            Intent i = new Intent();
+            i.putExtra("Nombre", getNombreValue);
+            i.putExtra("ID", getIDValue);
+            i.putExtra("Dios", "Mi nombre es Hector");
+            //i.setClass(MainActivity.this, PantallaActivity.class);
+            //i.setClass(MainActivity.this, RegistroActivity.class);
+            i.setClass(DirectorioActivity.this, MenuPrincipalActivity.class);
+            startActivity(i);
+            return true;
+        }
+
+
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    public class ImageLoaderClass extends AsyncTask<String, String, Bitmap> {
+
+        private ImageView SetImageViewHolder;
+        private Bitmap Imagebitmap;
+
+        public void SetImageViewHolder3(ImageView setImageViewHolder) {
+            this.SetImageViewHolder = setImageViewHolder;
+        }
+        public void SetImagebitmap3(Bitmap imagebitmap) {
+            this.Imagebitmap = imagebitmap;
+        }
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+
+        }
+        protected Bitmap doInBackground(String... args) {
+            try {
+                Imagebitmap = BitmapFactory.decodeStream((InputStream)new URL(args[0]).getContent());
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            return Imagebitmap;
+        }
+
+        protected void onPostExecute(Bitmap image) {
+
+            if(image != null){
+                SetImageViewHolder.setImageBitmap(image);
+
+            }
+        }
+
+
+
+    }
+    public void get_data(String data)
+    {
+
+        try {
+            JSONArray data_array=new JSONArray(data);
+
+            for (int i = 0 ; i < data_array.length() ; i++)
+            {
+                JSONObject obj=new JSONObject(data_array.get(i).toString());
+
+                Countries add=new Countries();
+                add.name = obj.getString("titulo");
+                //add.code = obj.getString("blog");
+
+                countries.add(add);
+
+            }
+
+            adapterDirectorio.notifyDataSetChanged();
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
 
     }
 

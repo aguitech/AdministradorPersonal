@@ -2,6 +2,7 @@
     <string name="app_name">AdministradorPersonal</string>
     <string name="action_settings">Settings</string>
     <string name="action_home">Inicio</string>
+    <string name="action_directorio">Directorio</string>
     <string name="action_salir">Salir</string>
     <string name="title_activity_pre_registro">PreRegistroActivity</string>
     <string name="title_activity_registro">RegistroActivity</string>
