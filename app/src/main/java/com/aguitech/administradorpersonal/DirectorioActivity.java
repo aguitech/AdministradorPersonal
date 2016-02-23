@@ -105,7 +105,8 @@ public class DirectorioActivity extends AppCompatActivity implements Download_da
         Download_data_directorio download_data = new Download_data_directorio((Download_data_directorio.download_complete) this);
         //download_data.download_data_from_link("http://www.kaleidosblog.com/tutorial/tutorial.json");
         //download_data.download_data_from_link("https://emocionganar.com/admin/panel/webservice_evento_android.php");
-        download_data.download_data_from_link("https://emocionganar.com/admin/panel/webservice_blog_android_nuevo.php");
+        //download_data.download_data_from_link("https://emocionganar.com/admin/panel/webservice_blog_android_nuevo.php");
+        download_data.download_data_from_link("http://administradorpersonal.com/directorio/panel/webservice_directorio.php");
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -211,8 +212,8 @@ public class DirectorioActivity extends AppCompatActivity implements Download_da
                 JSONObject obj=new JSONObject(data_array.get(i).toString());
 
                 Countries add=new Countries();
-                add.name = obj.getString("titulo");
-                //add.code = obj.getString("blog");
+                add.name = obj.getString("nombre");
+                add.code = obj.getString("celular");
 
                 countries.add(add);
 
