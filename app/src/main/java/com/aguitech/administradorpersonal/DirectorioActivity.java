@@ -1,6 +1,8 @@
 package com.aguitech.administradorpersonal;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
@@ -102,11 +104,22 @@ public class DirectorioActivity extends AppCompatActivity implements Download_da
 
         });
 
+        //CargarPreferencias();
+        SharedPreferences mispreferencias = getSharedPreferences("PreferenciasUsuario", Context.MODE_PRIVATE);
+        //txtnombre.setText(mispreferencias.getString(“nombre”, “”));
+        //Toast.makeText(getApplicationContext(), "Cargando Preferencias", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(getApplicationContext(), mispreferencias.getString("Nombre", ""), Toast.LENGTH_SHORT).show();
+        //Toast.makeText(getApplicationContext(), , Toast.LENGTH_SHORT).show();
+        String IDusuario = mispreferencias.getString("ID", "");
+        String URLdirectorio = "http://administradorpersonal.com/directorio/panel/webservice_directorio.php?id_registro=" + IDusuario;
+
+
         Download_data_directorio download_data = new Download_data_directorio((Download_data_directorio.download_complete) this);
         //download_data.download_data_from_link("http://www.kaleidosblog.com/tutorial/tutorial.json");
         //download_data.download_data_from_link("https://emocionganar.com/admin/panel/webservice_evento_android.php");
         //download_data.download_data_from_link("https://emocionganar.com/admin/panel/webservice_blog_android_nuevo.php");
-        download_data.download_data_from_link("http://administradorpersonal.com/directorio/panel/webservice_directorio.php");
+        //download_data.download_data_from_link("http://administradorpersonal.com/directorio/panel/webservice_directorio.php");
+        download_data.download_data_from_link(URLdirectorio);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
